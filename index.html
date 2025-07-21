@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Fahrerregistrierung – Uber Werbung</title>
   <style>
     * {
@@ -86,15 +86,13 @@
 
     <!-- Formular -->
     <form id="driverForm">
-      <input type="text" name="name" placeholder="Vorname" required>
-      <input type="text" name="lastname" placeholder="Nachname" required>
-      <input type="tel" name="phone" placeholder="Telefonnummer" required>
-      <input type="text" name="plate" placeholder="Autokennzeichen" required>
-      <input type="text" name="color" placeholder="Farbe des Autos" required>
-
-      <!-- Neue Felder für Datum und Uhrzeit -->
-      <input type="date" name="date" required>
-      <input type="time" name="time" required>
+      <input type="text" name="name" placeholder="Vorname" required />
+      <input type="text" name="lastname" placeholder="Nachname" required />
+      <input type="tel" name="phone" placeholder="Telefonnummer" required />
+      <input type="text" name="plate" placeholder="Autokennzeichen" required />
+      <input type="text" name="color" placeholder="Farbe des Autos" required />
+      <input type="date" name="date" required />
+      <input type="time" name="time" required />
 
       <button type="submit">Absenden</button>
     </form>
@@ -108,7 +106,7 @@
   <script>
     const form = document.getElementById('driverForm');
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
 
       const driver = {
@@ -118,17 +116,31 @@
         plate: form.plate.value,
         color: form.color.value,
         date: form.date.value,
-        time: form.time.value
+        time: form.time.value,
       };
 
-      const existing = JSON.parse(localStorage.getItem('drivers') || '[]');
-      existing.push(driver);
-      localStorage.setItem('drivers', JSON.stringify(existing));
+      // URL web app
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbyhYdlMjeexVsjiTepv-X5ylzC05nxWLsxZrUQzpBcYNQ03KKHQqRea_OjbJsYHSMEl0Q/exec';
 
-      alert('Die Daten wurden erfolgreich gespeichert!');
-      form.reset();
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(driver),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => {
+          if (response.ok) {
+            alert('Die Daten wurden erfolgreich gespeichert!');
+            form.reset();
+          } else {
+            alert('Fehler beim Speichern der Daten.');
+          }
+        })
+        .catch(error => {
+          alert('Netzwerkfehler: ' + error.message);
+        });
     });
   </script>
-
 </body>
 </html>
