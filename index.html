@@ -9,8 +9,8 @@
     }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #ffffff; /* weiß */
-      color: #000000;       /* schwarz */
+      background: #ffffff;
+      color: #000000;
       margin: 0;
       padding: 0;
     }
@@ -84,17 +84,21 @@
       <p>Werbung auf Ihrem Auto – bezahlt von Uber.</p>
     </div>
 
-    <!-- FORM -->
+    <!-- Formular -->
     <form id="driverForm">
       <input type="text" name="name" placeholder="Vorname" required>
       <input type="text" name="lastname" placeholder="Nachname" required>
       <input type="tel" name="phone" placeholder="Telefonnummer" required>
       <input type="text" name="plate" placeholder="Autokennzeichen" required>
       <input type="text" name="color" placeholder="Farbe des Autos" required>
+
+      <!-- Neue Felder für Datum und Uhrzeit -->
+      <input type="date" name="date" required>
+      <input type="time" name="time" required>
+
       <button type="submit">Absenden</button>
     </form>
 
-    <!-- ENDE ->
     <footer>
       © 2025 Uber Ad Partner – Alle Rechte vorbehalten.
     </footer>
@@ -112,7 +116,9 @@
         lastname: form.lastname.value,
         phone: form.phone.value,
         plate: form.plate.value,
-        color: form.color.value
+        color: form.color.value,
+        date: form.date.value,
+        time: form.time.value
       };
 
       const existing = JSON.parse(localStorage.getItem('drivers') || '[]');
