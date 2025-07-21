@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Fahrerregistrierung – Uber Werbung</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #ffffff; /* weiß */
+      color: #000000;       /* schwarz */
+      margin: 0;
+      padding: 0;
+    }
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    .ads {
+      max-width: 600px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .ads h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #000;
+    }
+    .ads p {
+      font-size: 18px;
+      margin: 5px 0;
+      color: #000;
+    }
+    form {
+      background: #f7f7f7;
+      padding: 30px;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    input:focus {
+      border-color: #000;
+      outline: none;
+    }
+    button {
+      background-color: #000;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #333;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+
+    <!-- Uber Werbung -->
+    <div class="ads">
+      <h1>🚗 Uber Werbung</h1>
+      <p>Registrieren Sie sich jetzt für unsere exklusive Werbekampagne.</p>
+      <p>Werbung auf Ihrem Auto – bezahlt von Uber.</p>
+    </div>
+
+    <!-- FORM -->
+    <form id="driverForm">
+      <input type="text" name="name" placeholder="Vorname" required>
+      <input type="text" name="lastname" placeholder="Nachname" required>
+      <input type="tel" name="phone" placeholder="Telefonnummer" required>
+      <input type="text" name="plate" placeholder="Autokennzeichen" required>
+      <input type="text" name="color" placeholder="Farbe des Autos" required>
+      <button type="submit">Absenden</button>
+    </form>
+
+    <!-- ENDE ->
+    <footer>
+      © 2025 Uber Ad Partner – Alle Rechte vorbehalten.
+    </footer>
+
+  </div>
+
+  <script>
+    const form = document.getElementById('driverForm');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const driver = {
+        name: form.name.value,
+        lastname: form.lastname.value,
+        phone: form.phone.value,
+        plate: form.plate.value,
+        color: form.color.value
+      };
+
+      const existing = JSON.parse(localStorage.getItem('drivers') || '[]');
+      existing.push(driver);
+      localStorage.setItem('drivers', JSON.stringify(existing));
+
+      alert('Die Daten wurden erfolgreich gespeichert!');
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
